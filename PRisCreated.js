@@ -28,8 +28,6 @@ const undoLastMerge = () => {
 
   async function deshacerMerge() {
     const { stdout, stderr } = await exec(commandUndoMerge);
-    // console.log('stdout:', stdout);
-    // console.log('stderr:', stderr);
   }
   deshacerMerge();
 }
@@ -40,13 +38,6 @@ const findIdLastCommit = () => {
   .toString().trim()
 }
 
-//undoLastMerge();
-
-//akkssdfasas HOLAsdfsdsdsdsdfsdsdsdassdsdssdsdsd
-// hola mundo
-//desde rama2
-//rama2s3
-//akskas
 module.exports = {
   existPullRequestInBranch, 
   undoLastMerge,
