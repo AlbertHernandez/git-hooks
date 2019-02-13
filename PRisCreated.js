@@ -20,7 +20,7 @@ const tokenAuth = args[1];
 
 //akkssdfasas HOLAsdfsdsdsdsdfsdsdsdassdsdssdsdsd
 // hola mundo
->>>>>>> newRama
+
 module.exports = {
   existPullRequestInBranch, 
 }
