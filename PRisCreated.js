@@ -26,12 +26,12 @@ const undoLastMerge = () => {
   
   const exec = util.promisify(require('child_process').exec);
 
-  async function ls() {
+  async function deshacerMerge() {
     const { stdout, stderr } = await exec(commandUndoMerge);
-    console.log('stdout:', stdout);
-    console.log('stderr:', stderr);
+    // console.log('stdout:', stdout);
+    // console.log('stderr:', stderr);
   }
-  ls();
+  deshacerMerge();
 }
 
 //undoLastMerge();
