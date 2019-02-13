@@ -1,7 +1,7 @@
 const githubAPI = require('./githubAPI');
 
-const existPullRequestInBranch = async (branchName, token) => {
-  const repo = 'AlbertHernandez/todo-reactjs'
+const existPullRequestInBranch = async (branchName, token, repo) => {
+  // const repo = 'AlbertHernandez/todo-reactjs'
   githubAPI.initialize(token, repo);
   const pullRequestArray = await githubAPI.listAllPR();
   const exists = existPullRequestOfBranch(branchName, pullRequestArray);
@@ -17,7 +17,7 @@ const existPullRequestOfBranch = (branch, pullRequestArray) => {
 var args = process.argv.slice(2);
 const branchName = args[0];
 const tokenAuth = args[1];
-//akkssdfasas HOLAsdfsdsdsd
+//akkssdfasas HOLAsdfsdsdsdsdf
 module.exports = {
   existPullRequestInBranch, 
 }
