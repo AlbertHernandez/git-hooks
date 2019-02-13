@@ -18,7 +18,9 @@ var args = process.argv.slice(2);
 const branchName = args[0];
 const tokenAuth = args[1];
 
-//akkssdfasas HOLAsdfsdsdsdsdfsdsdsdassdsdssd
+//akkssdfasas HOLAsdfsdsdsdsdfsdsdsdassdsdssdsdsd
+// hola mundo
+>>>>>>> newRama
 module.exports = {
   existPullRequestInBranch, 
 }
