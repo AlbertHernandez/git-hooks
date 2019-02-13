@@ -18,9 +18,6 @@ var args = process.argv.slice(2);
 const branchName = args[0];
 const tokenAuth = args[1];
 
-const respuesta = response => {
-  console.log(response);
+module.exports = {
+  existPullRequestInBranch, 
 }
-
-var existe = existPullRequestInBranch(branchName, tokenAuth).then(respuesta);
-
