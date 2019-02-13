@@ -34,6 +34,12 @@ const undoLastMerge = () => {
   deshacerMerge();
 }
 
+const findIdLastCommit = () => {
+  return require('child_process')
+  .execSync('git rev-parse HEAD')
+  .toString().trim()
+}
+
 //undoLastMerge();
 
 //akkssdfasas HOLAsdfsdsdsdsdfsdsdsdassdsdssdsdsd
@@ -43,5 +49,6 @@ const undoLastMerge = () => {
 //akskas
 module.exports = {
   existPullRequestInBranch, 
-  undoLastMerge
+  undoLastMerge,
+  findIdLastCommit
 }
