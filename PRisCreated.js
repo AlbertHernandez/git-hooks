@@ -4,8 +4,9 @@ const util = require('util');
 
 const existPullRequestInBranch = async (branchName) => {
   const pullRequestArray = await githubAPI.listAllPR();
+
   const exists = existPullRequestOfBranch(branchName, pullRequestArray);
-  //console.log('salida: ', exists);
+  console.log('salida: ', exists);
   return exists
 }
 
@@ -16,15 +17,17 @@ const existPullRequestOfBranch = (branch, pullRequestArray) => {
 }
 
 const inicialize = async (token) => {
+  console.log('token: ', token);
+  
   const client = githubAPI.initClient(token);
-  const userName = await githubAPI.getUserName();
-  const urlRepo = getURLGitHub();
-  const ghrepo = githubAPI.initRepo(urlRepo);
-}
+  
 
-var args = process.argv.slice(2);
-// const branchName = args[0];
-// const tokenAuth = args[1];
+  const urlRepo = getURLGitHub();
+  
+  const ghrepo = githubAPI.initRepo(urlRepo);
+  
+
+}
 
 const undoLastMerge = () => {
 
@@ -44,22 +47,30 @@ const findIdLastCommit = () => {
   .toString().trim()
 }
 
+
+
 const getURLGitHub = () => {
   return require('child_process')
   .execSync('git config --get remote.origin.url')
-  .toString().trim().split('git@github.com:')[1]
+  .toString().trim().split('git@github.com:')[1].split('.git')[0]
 }
 
+const getCurrentBranch = () => {
+  return require('child_process')
+  .execSync('git rev-parse --abbrev-ref HEAD')
+  .toString();
+}
 
-//console.log('hola: ', getURLGitHub());
-//rama
+// const branchName = 'NewRama8';
+// const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
 
-const branchName = 'prueba2';
-const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
+// inicialize(tokenAuth);
+// existPullRequestInBranch(branchName);
 
 module.exports = {
   existPullRequestInBranch, 
   undoLastMerge,
   findIdLastCommit,
-  inicialize
+  inicialize,
+  getCurrentBranch
 }
