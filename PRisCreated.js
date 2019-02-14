@@ -66,7 +66,15 @@ const getBranchMerged = () => {
   .execSync('git reflog -1 | cut -d" " -f 4 | sed "s/://"')
   .toString().trim();
 }
-// const branchName = 'NewRama8';
+
+const getLast10 = () => {
+  return require('child_process')
+  .execSync('git reflog -10 | cut -d" " -f 4 | sed "s/://"')
+  .toString().trim();
+}
+
+
+// const branchName = 'NewRama8';master
 // const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
 
 // inicialize(tokenAuth);
@@ -80,5 +88,6 @@ module.exports = {
   findIdLastCommit,
   inicialize,
   getCurrentBranch,
-  getBranchMerged
+  getBranchMerged,
+  getLast10
 }
