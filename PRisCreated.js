@@ -43,7 +43,7 @@ const undoLastMerge = () => {
 
 const findIdLastCommit = () => {
   return require('child_process')
-  .execSync('git rev-parse HEAD')
+  .execSync('git log --format="%H" -n 1')
   .toString().trim()
 }
 
@@ -66,12 +66,12 @@ const getBranchMerged = () => {
   .execSync('git reflog -1 | cut -d" " -f 4 | sed "s/://"')
   .toString().trim();
 }
-
 // const branchName = 'NewRama8';
 // const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
 
 // inicialize(tokenAuth);
 // existPullRequestInBranch(branchName);s
+//rama 10
 //rama 10
 
 module.exports = {
