@@ -10,7 +10,7 @@ const existPullRequestInBranch = async (branchName) => {
   return exists
 }
 
-const existPullRequestOfBranch = (branch, pullRequestArray) => {
+const existPullRequestOfBranch = (branch, pullRequestArray = []) => {
   return pullRequestArray.map(pr => pr.head.ref)
                          .filter(prBranch => prBranch === branch)
                          .length === 1 ? true : false;
