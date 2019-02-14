@@ -80,7 +80,7 @@ const getLast10 = () => {
 // inicialize(tokenAuth);
 // existPullRequestInBranch(branchName);s
 //rama 10
-//rama 10 tu puta madre 2222
+//rama 10 tu puta madre 2222 rama 17
 
 module.exports = {
   existPullRequestInBranch, 
