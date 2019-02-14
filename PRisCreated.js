@@ -72,7 +72,7 @@ const getBranchMerged = () => {
 // inicialize(tokenAuth);
 // existPullRequestInBranch(branchName);s
 //rama 10
-//rama 10
+//rama 10 tu puta madre
 
 module.exports = {
   existPullRequestInBranch, 
