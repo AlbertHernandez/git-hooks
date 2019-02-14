@@ -73,6 +73,7 @@ const getBranchMerged = () => {
 // existPullRequestInBranch(branchName);s
 //rama 10
 //rama 10
+//rama 12
 
 module.exports = {
   existPullRequestInBranch, 
