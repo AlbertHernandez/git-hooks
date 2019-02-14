@@ -3,18 +3,9 @@ const { spawn } = require('child_process');
 const util = require('util');
 
 const existPullRequestInBranch = async (branchName) => {
-
   const pullRequestArray = await githubAPI.listAllPR();
-
-  
-
   const exists = existPullRequestOfBranch(branchName, pullRequestArray);
-
-  
-  
-
-  console.log('salida: ', exists);
-  
+  //console.log('salida: ', exists);
   return exists
 }
 
@@ -24,10 +15,10 @@ const existPullRequestOfBranch = (branch, pullRequestArray) => {
                          .length === 1 ? true : false;
 }
 
-const inicialize = async (token, repo) => {
+const inicialize = async (token) => {
   const client = githubAPI.initClient(token);
   const userName = await githubAPI.getUserName();
-  const urlRepo = userName + '/'+repo;
+  const urlRepo = getURLGitHub();
   const ghrepo = githubAPI.initRepo(urlRepo);
 }
 
@@ -53,14 +44,18 @@ const findIdLastCommit = () => {
   .toString().trim()
 }
 
+const getURLGitHub = () => {
+  return require('child_process')
+  .execSync('git config --get remote.origin.url')
+  .toString().trim().split('git@github.com:')[1]
+}
+
+
+//console.log('hola: ', getURLGitHub());
+//rama 8
+
 const branchName = 'prueba2';
 const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
-const repogh = 'todo-reactjs'
-
-// inicialize(tokenAuth, repogh);
-// existPullRequestInBranch(branchName);
-
-
 
 module.exports = {
   existPullRequestInBranch, 

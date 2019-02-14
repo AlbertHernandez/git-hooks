@@ -33,26 +33,8 @@ const getUserName = () => {
   // });
 }
 
-console.log('que tal');
-
 initClient('ae7808ada3d9133b6dfffceb4d661a0278ca1794');
 initRepo('AlbertHernandez/todo-reactjs');
-
-// client.get('/user', {}, function (err, status, body, headers) {
-//   console.log(body.login); //json object
-// });
-
-
-// const getUser = async () => {
-//   const usname = await getUserClient();
-//   console.log(usname);
-  
-// }
-
-//getUser();
-
-
-
 
 module.exports = {
   initClient,
