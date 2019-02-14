@@ -52,7 +52,7 @@ const getURLGitHub = () => {
 
 
 //console.log('hola: ', getURLGitHub());
-//rama 8
+//rama
 
 const branchName = 'prueba2';
 const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
