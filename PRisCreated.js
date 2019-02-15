@@ -81,7 +81,7 @@ const getLast10 = () => {
 // existPullRequestInBranch(branchName);s
 //rama 10
 //rama 10 tu puta madre 2222 master conflicto haciendo nuevo oijijojiojojoj
-
+//mec
 module.exports = {
   existPullRequestInBranch, 
   undoLastMerge,
