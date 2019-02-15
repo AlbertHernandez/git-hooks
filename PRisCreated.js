@@ -78,7 +78,7 @@ const getLast10 = () => {
 // const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
 
 // inicialize(tokenAuth); skdskd
-// existPullRequestInBranch(branchName);s
+// existPullRequestInBranch(branchName);ssdds
 //rama 10
 //rama 10 tu puta madre 2222 master conflicto haciendo nuevo oijijojiojojoj
 //mec skdkssd
