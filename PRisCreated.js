@@ -75,7 +75,7 @@ const getLast10 = () => {
 
 
 // const branchName = 'NewRama8';master
-// const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
+// const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';sd
 
 // inicialize(tokenAuth);
 // existPullRequestInBranch(branchName);s
