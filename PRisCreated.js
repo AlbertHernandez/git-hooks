@@ -6,7 +6,7 @@ const existPullRequestInBranch = async (branchName) => {
   const pullRequestArray = await githubAPI.listAllPR();
 
   const exists = existPullRequestOfBranch(branchName, pullRequestArray);
-  console.log('salida: ', exists);
+  // console.log('salida: ', exists);
   return exists
 }
 
@@ -17,7 +17,7 @@ const existPullRequestOfBranch = (branch, pullRequestArray = []) => {
 }
 
 const inicialize = async (token) => {
-  console.log('token: ', token);
+  // console.log('token: ', token);
   
   const client = githubAPI.initClient(token);
   
@@ -77,8 +77,8 @@ const getLast10 = () => {
 // const branchName = 'NewRama8';master
 // const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';sd
 
-// inicialize(tokenAuth);
-// existPullRequestInBranch(branchName);s
+// inicialize(tokenAuth); skdskd
+// existPullRequestInBranch(branchName);ssdds
 //rama 10
 //rama 10 tu puta madre 2222 master conflicto haciendo nuevo oijijojiojojoj
 //mec skdkssd skdksdks
