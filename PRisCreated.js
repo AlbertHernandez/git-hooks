@@ -17,7 +17,7 @@ const existPullRequestOfBranch = (branch, pullRequestArray = []) => {
 }
 
 const inicialize = async (token) => {
-  console.log('token: ', token);
+  // console.log('token: ', token);
   
   const client = githubAPI.initClient(token);
   
