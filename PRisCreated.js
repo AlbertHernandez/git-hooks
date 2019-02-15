@@ -82,7 +82,7 @@ const getLast10 = () => {
 //rama 10
 //rama 10 tu puta madre 2222 master conflicto haciendo nuevo oijijojiojojoj
 //mec skdkssd skdksdks
-//aksakdk
+//aksakdk skdkd
 module.exports = {
   existPullRequestInBranch, 
   undoLastMerge,
