@@ -35,7 +35,7 @@ const listAllPR = () => {
 
 // initClient('ae7808ada3d9133b6dfffceb4d661a0278ca1794');
 // initRepo('AlbertHernandez/hook');
-//bla bla blasdsdfdffsdsdsddsd
+//bla bla blasdsdfdffsdsdsddsdsd
 module.exports = {
   initClient,
   initRepo,
