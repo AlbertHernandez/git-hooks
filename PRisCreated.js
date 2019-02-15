@@ -6,7 +6,7 @@ const existPullRequestInBranch = async (branchName) => {
   const pullRequestArray = await githubAPI.listAllPR();
 
   const exists = existPullRequestOfBranch(branchName, pullRequestArray);
-  console.log('salida: ', exists);
+  // console.log('salida: ', exists);
   return exists
 }
 
