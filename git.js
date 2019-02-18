@@ -31,8 +31,8 @@ const getBranchesContainsCommitID = arrayBranches => {
       [],
     ),
   );
-  const sinRepes = util.removeDuplicates(array);
-  return util.removeFirst2Caracters(sinRepes);
+  const withoutRepites = util.removeDuplicates(array);
+  return util.removeFirst2Caracters(withoutRepites);
 };
 
 const getBranchesPendingToPush = () => {
