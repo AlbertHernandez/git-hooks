@@ -60,12 +60,29 @@ const getBranchesContainsCommitID = arrayBranches => {
   return utilidades.removeFirst2Caracters(sinRepes)
 }
 
+const getBranchesPendingToPush = () => {
+  const currentBranch = getCurrentBranch()
+  const notAllowedBranches = {
+    staging: true,
+    beta: true,
+    master: true,
+    // [currentBranch]: true
+  }
+  const IDCommitNotPush = getIDCommitNotPushInBranch(currentBranch)
+  const branchArrayWithoutFilter = getBranchesContainsCommitID(IDCommitNotPush)
+  const branchArrayToCheckPR = utilidades.removeNotAllowed(branchArrayWithoutFilter, notAllowedBranches)
+  return branchArrayToCheckPR
+}
+
+
+
 module.exports = {
   existPullRequestInBranch,
   inicialize,
   getCurrentBranch,
   getIDCommitNotPushInBranch,
-  getBranchesContainsCommitID
+  getBranchesContainsCommitID,
+  getBranchesPendingToPush
 }
 
-//skdksfssdfsd
+//skdksfssdfsddf
