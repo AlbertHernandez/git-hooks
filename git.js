@@ -41,7 +41,7 @@ const getBranchesPendingToPush = () => {
     staging: true,
     beta: true,
     master: true,
-    // [currentBranch]: true
+    // [currentBranch]: true,
   };
   const IDCommitNotPush = gitCommand.getIDCommitNotPushInBranch(currentBranch);
   const branchArrayWithoutFilter = getBranchesContainsCommitID(IDCommitNotPush);
@@ -64,5 +64,3 @@ module.exports = {
   getBranchesPendingToPush,
   getNonCreatedPRBranches,
 };
-
-// skdksfssdfsddfdfsd
