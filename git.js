@@ -70,9 +70,15 @@ const getNonCreatedPRBranches = async arrayBranches => {
   // probar();
   //const tokenAuth = token.getTokenAuth();
   //await inicialize(tokenAuth);
-  return arrayBranches.filter(
-    async branch => !(await existPullRequestInBranch(branch)),
+  const devolver = arrayBranches.filter(async branch => {
+      console.log('holaa');
+      return !(await existPullRequestInBranch(branch));
+
+    }
   );
+
+  console.log('devolver: ', devolver);
+  return devolver
   
 };
 
