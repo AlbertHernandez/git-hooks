@@ -2,6 +2,8 @@ const util = require('util')
 const githubAPI = require('./githubAPI')
 const utilidades = require('./.git/hooks/util/util');
 
+const tokenAuth = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
+
 const inicialize = async token => {
   const client = githubAPI.initClient(token);
   const urlRepo = getURLGitHub();
@@ -87,6 +89,13 @@ const getBranchesPendingToPush = () => {
   return branchArrayToCheckPR;
 };
 
+const getNonCreatedPRBranches = async arrayBranches => {
+  await inicialize(tokenAuth);
+  return await arrayBranches.filter(async function(branch) {
+    return !(await existPullRequestInBranch(branch));
+  });
+};
+
 module.exports = {
   existPullRequestInBranch,
   inicialize,
@@ -94,6 +103,7 @@ module.exports = {
   getIDCommitNotPushInBranch,
   getBranchesContainsCommitID,
   getBranchesPendingToPush,
+  getNonCreatedPRBranches
 };
 
-// skdksfssdfsddfdf
+// skdksfssdfsddfdfsd
