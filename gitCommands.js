@@ -1,35 +1,26 @@
 const cp = require('child_process');
 
-const execute = command =>
-  cp
-    .execSync(command)
-    .toString()
-    .trim();
+const execute = command => cp.execSync(command).toString();
 
 const getURLGitHub = () =>
   execute('git config --get remote.origin.url')
     .split('git@github.com:')[1]
-    .split('.git')[0];
+    .split('.git')[0]
+    .trim();
 
-const getCurrentBranch = () => execute('git rev-parse --abbrev-ref HEAD');
+const getCurrentBranch = () =>
+  execute('git rev-parse --abbrev-ref HEAD').trim();
 
 const getIDCommitNotPushInBranch = branch => {
-  const res = cp
-    .execSync(`git log origin/${branch}..HEAD --format="%H"`)
-    .toString()
+  const res = execute(`git log origin/${branch}..HEAD --format="%H"`)
     .split('\n')
-    .map(id => {
-      return id.substr(0, 7);
-    });
+    .map(id => id.substr(0, 7));
   res.pop();
   return res;
 };
 
 const getBranchesContainsCommitIDWithoutClean = commitID =>
-  cp
-    .execSync(`git branch --contains ${commitID}`)
-    .toString()
-    .split('\n');
+  execute(`git branch --contains ${commitID}`).split('\n');
 
 module.exports = {
   getURLGitHub,
