@@ -65,6 +65,8 @@ const getBranchesPendingToPush = () => {
 };
 
 const getNonCreatedPRBranches = async arrayBranches => {
+  console.log('holaaaa');
+  
   // probar();
   //const tokenAuth = token.getTokenAuth();
   //await inicialize(tokenAuth);
