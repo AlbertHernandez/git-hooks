@@ -29,9 +29,6 @@ const getNonCreatedPRBranches = async arrayBranches => {
   return await arrayBranches.filter(async function(branch) {
     return !(await git.existPullRequestInBranch(branch));
   });
-
-  process.exit(1)
-
 }
 
 
@@ -63,12 +60,12 @@ const branchArrayWithoutFilter = git.getBranchesContainsCommitID(IDCommitNotPush
 
 const branchArrayToCheckPR = util.removeNotAllowed(branchArrayWithoutFilter, notAllowedBranches);
 
-console.log('branchArrayToCheckPR: ', branchArrayToCheckPR);
 
+console.log('branchArrayToCheckPR: ', branchArrayToCheckPR);
 
 // checkExistPRInBranches(branchArrayToCheckPR);
 
-// getNonCreate.dPRBranches(branchArrayToCheckPR)
+getNonCreatedPRBranches(branchArrayToCheckPR);
 
 // process.exit(1);
 
