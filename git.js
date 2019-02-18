@@ -1,80 +1,91 @@
-const githubAPI = require('./githubAPI')
 const util = require('util')
-const utilidades = require('./.git/hooks/util/util')
+const githubAPI = require('./githubAPI')
+const utilidades = require('./.git/hooks/util/util');
 
-const inicialize = async (token) => {
-  const client = githubAPI.initClient(token)
-  const urlRepo = getURLGitHub()
-  const ghrepo = githubAPI.initRepo(urlRepo)
-}
+const inicialize = async token => {
+  const client = githubAPI.initClient(token);
+  const urlRepo = getURLGitHub();
+  const ghrepo = githubAPI.initRepo(urlRepo);
+};
 
-const existPullRequestInBranch = async (branchName) => {
-  const pullRequestArray = await githubAPI.listAllPR()
-  return existPullRequestOfBranch(branchName, pullRequestArray)
-}
+const existPullRequestInBranch = async branchName => {
+  const pullRequestArray = await githubAPI.listAllPR();
+  return existPullRequestOfBranch(branchName, pullRequestArray);
+};
 
 const existPullRequestOfBranch = (branch, pullRequestArray = []) => {
-	return pullRequestArray.map(pr => pr.head.ref)
-    .filter(prBranch => prBranch === branch)
-    .length === 1
-}
+  return (
+    pullRequestArray
+      .map(pr => pr.head.ref)
+      .filter(prBranch => prBranch === branch).length === 1
+  );
+};
 
 const getURLGitHub = () => {
   return require('child_process')
     .execSync('git config --get remote.origin.url')
-    .toString().trim().split('git@github.com:')[1].split('.git')[0]
-}
+    .toString()
+    .trim()
+    .split('git@github.com:')[1]
+    .split('.git')[0];
+};
 
 const getCurrentBranch = () => {
   return require('child_process')
     .execSync('git rev-parse --abbrev-ref HEAD')
-    .toString().trim()
-}
+    .toString()
+    .trim();
+};
 
-const getIDCommitNotPushInBranch = (branch) => {
-  const command = 'git log origin/' + branch + '..HEAD --format="%H"'
-  var res = require('child_process')
-    .execSync(command)
-    .toString().split('\n').map(function (id) {
-      return id.substr(0, 7)
-    })
-  res.pop()
-  return res
-}
-
-const getBranchesContainsCommitIDWithoutClean = (commitID) => {
-  const command = 'git branch --contains ' + commitID
+const getIDCommitNotPushInBranch = branch => {
+  const command = `git log origin/${  branch  }..HEAD --format="%H"`;
   let res = require('child_process')
     .execSync(command)
-    .toString().split('\n')
+    .toString()
+    .split('\n')
+    .map(function(id) {
+      return id.substr(0, 7);
+    });
+  res.pop();
+  return res;
+};
 
-  return res
-}
+const getBranchesContainsCommitIDWithoutClean = commitID => {
+  const command = `git branch --contains ${  commitID}`;
+  const res = require('child_process')
+    .execSync(command)
+    .toString()
+    .split('\n');
+
+  return res;
+};
 
 const getBranchesContainsCommitID = arrayBranches => {
-  var array = utilidades.removeWhiteSpaces(arrayBranches.reduce(function (previus, commitID) {
-    // console.log('commit: ', commitID, ' -g etBranchesFromCommitID: ' ,getBranchesContainsCommitID(commitID));
-    return [...previus, ...getBranchesContainsCommitIDWithoutClean(commitID)]
-  }, []))
-  const sinRepes = utilidades.removeDuplicates(array)
-  return utilidades.removeFirst2Caracters(sinRepes)
-}
+  const array = utilidades.removeWhiteSpaces(
+    arrayBranches.reduce(function(previus, commitID) {
+      return [...previus, ...getBranchesContainsCommitIDWithoutClean(commitID)];
+    }, []),
+  );
+  const sinRepes = utilidades.removeDuplicates(array);
+  return utilidades.removeFirst2Caracters(sinRepes);
+};
 
 const getBranchesPendingToPush = () => {
-  const currentBranch = getCurrentBranch()
+  const currentBranch = getCurrentBranch();
   const notAllowedBranches = {
     staging: true,
     beta: true,
     master: true,
     // [currentBranch]: true
-  }
-  const IDCommitNotPush = getIDCommitNotPushInBranch(currentBranch)
-  const branchArrayWithoutFilter = getBranchesContainsCommitID(IDCommitNotPush)
-  const branchArrayToCheckPR = utilidades.removeNotAllowed(branchArrayWithoutFilter, notAllowedBranches)
-  return branchArrayToCheckPR
-}
-
-
+  };
+  const IDCommitNotPush = getIDCommitNotPushInBranch(currentBranch);
+  const branchArrayWithoutFilter = getBranchesContainsCommitID(IDCommitNotPush);
+  const branchArrayToCheckPR = utilidades.removeNotAllowed(
+    branchArrayWithoutFilter,
+    notAllowedBranches,
+  );
+  return branchArrayToCheckPR;
+};
 
 module.exports = {
   existPullRequestInBranch,
@@ -82,7 +93,7 @@ module.exports = {
   getCurrentBranch,
   getIDCommitNotPushInBranch,
   getBranchesContainsCommitID,
-  getBranchesPendingToPush
-}
+  getBranchesPendingToPush,
+};
 
-//skdksfssdfsddf
+// skdksfssdfsddfdf
