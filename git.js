@@ -18,6 +18,8 @@ const existPullRequestOfBranch = (branch, pullRequestArray = []) =>
 
 const existPullRequestInBranch = async branchName => {
   try {
+    console.log('hola');
+    
     const tokenAuth = token.getTokenAuth();
     await inicialize(tokenAuth);
 
@@ -63,12 +65,13 @@ const getBranchesPendingToPush = () => {
 };
 
 const getNonCreatedPRBranches = async arrayBranches => {
-  // const tokenAuth = token.getTokenAuth();
-  // await inicialize(tokenAuth);
-  // return arrayBranches.filter(
-  //   async branch => !(await existPullRequestInBranch(branch)),
-  // );
-  probar();
+  // probar();
+  //const tokenAuth = token.getTokenAuth();
+  //await inicialize(tokenAuth);
+  return arrayBranches.filter(
+    async branch => !(await existPullRequestInBranch(branch)),
+  );
+  
 };
 
 module.exports = {
@@ -76,15 +79,15 @@ module.exports = {
   getNonCreatedPRBranches,
 };
 
-const probar = async () => {
-  const tokenAuth = token.getTokenAuth();
-  await inicialize(tokenAuth);
-  const pr = await githubAPI.listAllPR();
-  //console.log('pr: ', pr);
+// const probar = async () => {
+//   const tokenAuth = token.getTokenAuth();
+//   await inicialize(tokenAuth);
+//   const pr = await githubAPI.listAllPR();
+//   console.log('pr: ', pr);
 
-  //githubAPI.pruebas();
-  process.exit(1);
-};
+//   //githubAPI.pruebas();
+//   process.exit(1);
+// };
 
-probar();
+// probar();
 
