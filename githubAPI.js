@@ -1,6 +1,6 @@
 var github = require('octonode');
-let ghrepo;
-let client;
+let ghrepo
+let client
 
 const initClient = token => {
   return client = github.client(token);
@@ -17,6 +17,9 @@ const listAllPR = () => {
     });
   });
 }
+
+console.log()
+
 
 // const getUserName = () => {
 //   return new Promise((resolve, reject) => {
