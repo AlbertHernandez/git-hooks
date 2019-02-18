@@ -17,8 +17,18 @@ const existPullRequestOfBranch = (branch, pullRequestArray = []) =>
     .filter(prBranch => prBranch === branch).length === 1;
 
 const existPullRequestInBranch = async branchName => {
-  const pullRequestArray = await githubAPI.listAllPR();
-  return existPullRequestOfBranch(branchName, pullRequestArray);
+  try {
+    const tokenAuth = token.getTokenAuth();
+    await inicialize(tokenAuth);
+
+    console.log('sd2');
+    const pullRequestArray = await githubAPI.listAllPR();
+
+    console.log('skdkd');
+    return existPullRequestOfBranch(branchName, pullRequestArray);
+  } catch (e) {
+    console.log('HOLA QUE TAL: ', e);
+  }
 };
 
 const getBranchesContainsCommitID = arrayBranches => {
@@ -53,15 +63,28 @@ const getBranchesPendingToPush = () => {
 };
 
 const getNonCreatedPRBranches = async arrayBranches => {
-  const tokenAuth = token.getTokenAuth();
-  await inicialize(tokenAuth);
-  return arrayBranches.filter(
-    async branch => !(await existPullRequestInBranch(branch)),
-  );
+  // const tokenAuth = token.getTokenAuth();
+  // await inicialize(tokenAuth);
+  // return arrayBranches.filter(
+  //   async branch => !(await existPullRequestInBranch(branch)),
+  // );
+  probar();
 };
 
 module.exports = {
   getBranchesPendingToPush,
   getNonCreatedPRBranches,
 };
-//prueba
+
+const probar = async () => {
+  const tokenAuth = token.getTokenAuth();
+  await inicialize(tokenAuth);
+  const pr = await githubAPI.listAllPR();
+  //console.log('pr: ', pr);
+
+  //githubAPI.pruebas();
+  process.exit(1);
+};
+
+probar();
+
