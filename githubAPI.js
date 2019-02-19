@@ -1,6 +1,7 @@
-var github = require('octonode');
-let ghrepo
-let client
+const github = require('octonode');
+
+let ghrepo;
+let client;
 
 const initClient = token => {
   client = github.client(token);
