@@ -4,7 +4,10 @@ let ghrepo;
 let client;
 
 const initClient = token => {
+  console.log('hola')
   client = github.client(token);
+  console.log(client);
+  
 };
 
 const initRepo = repositorio => {
