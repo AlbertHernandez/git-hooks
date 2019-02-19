@@ -36,15 +36,19 @@ const getBranchesPendingToPush = () => {
     staging: true,
     beta: true,
     master: true,
-    [currentBranch]: true,
+    dev: true,
   };
+  if (!(currentBranch in notAllowedBranches)) {
+    return [];
+  }
+
   const IDCommitNotPush = gitCommand.getIDCommitNotPushInBranch(currentBranch);
   const branchArrayWithoutFilter = getBranchesContainsCommitID(IDCommitNotPush);
-  const branchArrayToCheckPR = util.removeNotAllowed(
-    branchArrayWithoutFilter,
-    notAllowedBranches,
-  );
-  return branchArrayToCheckPR;
+  // const branchArrayToCheckPR = util.removeNotAllowed(
+  //   branchArrayWithoutFilter,
+  //   notAllowedBranches,
+  // );
+  return branchArrayWithoutFilter;
 };
 
 const getNonCreatedPRBranches = async arrayBranches => {
