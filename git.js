@@ -63,5 +63,3 @@ module.exports = {
   getBranchesPendingToPush,
   getNonCreatedPRBranches,
 };
-
-//r1 skdks
