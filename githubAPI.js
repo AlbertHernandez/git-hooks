@@ -3,11 +3,11 @@ let ghrepo
 let client
 
 const initClient = token => {
-  return client = github.client(token);
+  client = github.client(token);
 };
 
 const initRepo = repositorio => {
-  return ghrepo = client.repo(repositorio);
+  ghrepo = client.repo(repositorio);
 };
 
 const listPR = async () => {
