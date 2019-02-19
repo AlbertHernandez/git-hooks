@@ -32,16 +32,6 @@ const getBranchesContainsCommitID = arrayBranches => {
 
 const getBranchesPendingToPush = () => {
   const currentBranch = gitCommand.getCurrentBranch();
-  const notAllowedBranches = {
-    staging: true,
-    beta: true,
-    master: true,
-    dev: true,
-  };
-  if (!(currentBranch in notAllowedBranches)) {
-    return [];
-  }
-
   const IDCommitNotPush = gitCommand.getIDCommitNotPushInBranch(currentBranch);
   const branchArrayWithoutFilter = getBranchesContainsCommitID(IDCommitNotPush);
   // const branchArrayToCheckPR = util.removeNotAllowed(
@@ -63,9 +53,21 @@ const getNonCreatedPRBranches = async arrayBranches => {
   return res;
 };
 
+const Check = () => {
+  const currentBranch = gitCommand.getCurrentBranch();
+  const notAllowedBranches = {
+    staging: true,
+    beta: true,
+    master: true,
+    dev2: true,
+  };
+  return currentBranch in notAllowedBranches;
+};
+
 module.exports = {
   getBranchesPendingToPush,
   getNonCreatedPRBranches,
+  Check,
 };
 
 //r1 skdks
