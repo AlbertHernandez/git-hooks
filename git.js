@@ -5,6 +5,13 @@ const util = require('./.git/hooks/util/util');
 const gitCommand = require('./gitCommands');
 const token = require('./token');
 
+const notAllowedBranches = {
+  staging: true,
+  beta: true,
+  master: true,
+  dev2: true,
+};
+
 const inicialize = async tokenAuth => {
   githubAPI.initClient(tokenAuth);
   const urlRepo = gitCommand.getURLGitHub();
@@ -32,12 +39,6 @@ const getBranchesContainsCommitID = arrayBranches => {
 
 const getBranchesPendingToPush = () => {
   const currentBranch = gitCommand.getCurrentBranch();
-  const notAllowedBranches = {
-    staging: true,
-    beta: true,
-    master: true,
-    [currentBranch]: true,
-  };
   const IDCommitNotPush = gitCommand.getIDCommitNotPushInBranch(currentBranch);
   const branchArrayWithoutFilter = getBranchesContainsCommitID(IDCommitNotPush);
   const branchArrayToCheckPR = util.removeNotAllowed(
@@ -59,7 +60,13 @@ const getNonCreatedPRBranches = async arrayBranches => {
   return res;
 };
 
+const Check = () => {
+  const currentBranch = gitCommand.getCurrentBranch();
+  return currentBranch in notAllowedBranches;
+};
+
 module.exports = {
   getBranchesPendingToPush,
   getNonCreatedPRBranches,
+  Check,
 };
