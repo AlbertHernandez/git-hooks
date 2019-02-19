@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-//aksks
+
 const githubAPI = require('./githubAPI');
 const util = require('./.git/hooks/util/util');
 const gitCommand = require('./gitCommands');
@@ -11,15 +11,10 @@ const inicialize = async tokenAuth => {
   githubAPI.initRepo(urlRepo);
 };
 
-const existPullRequestOfBranch = (branch, pullRequestArray = []) =>
+const existPullRequestOfBranch = (branch, pullRequestArray = []) => 
   pullRequestArray
     .map(pr => pr.head.ref)
     .filter(prBranch => prBranch === branch).length === 1;
-
-const existPullRequestInBranch = async branchName => {
-  const pullRequestArray = await githubAPI.listAllPR();
-  return existPullRequestOfBranch(branchName, pullRequestArray);
-};
 
 const getBranchesContainsCommitID = arrayBranches => {
   const array = util.removeWhiteSpaces(
@@ -55,9 +50,13 @@ const getBranchesPendingToPush = () => {
 const getNonCreatedPRBranches = async arrayBranches => {
   const tokenAuth = token.getTokenAuth();
   await inicialize(tokenAuth);
-  return arrayBranches.filter(
-    async branch => !(await existPullRequestInBranch(branch)),
-  );
+  const listPR = await githubAPI.listPR();
+
+  const res = arrayBranches.filter(branch => {
+    return !existPullRequestOfBranch(branch, listPR[0]);
+  });
+
+  return res;
 };
 
 module.exports = {

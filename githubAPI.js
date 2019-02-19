@@ -8,18 +8,12 @@ const initClient = token => {
 
 const initRepo = repositorio => {
   return ghrepo = client.repo(repositorio);
-}
+};
 
-const listAllPR = () => {
-  return new Promise((resolve, reject) => {
-    ghrepo.prs((_, pullRequestArray)=> {
-      resolve(pullRequestArray);
-    });
-  });
-}
-
-console.log()
-
+const listPR = async () => {
+  const result = await ghrepo.prsAsync({ per_page: 100 });
+  return result;
+};
 
 // const getUserName = () => {
 //   return new Promise((resolve, reject) => {
@@ -42,5 +36,5 @@ console.log()
 module.exports = {
   initClient,
   initRepo,
-  listAllPR,
-}
+  listPR,
+};
