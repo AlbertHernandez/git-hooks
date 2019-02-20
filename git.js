@@ -57,7 +57,7 @@ const getNonCreatedPRBranches = async arrayBranches => {
   const path = `/repos/${urlRepo}/pulls`;
   const listPR = await ghAPI.fetchInfoFromGHAPI(path);
   console.log('listPR: ', listPR);
-  process.exit(1);
+  // process.exit(1);
   const res = arrayBranches.filter(branch => {
     return !existPullRequestOfBranch(branch, listPR[0]);
   });
