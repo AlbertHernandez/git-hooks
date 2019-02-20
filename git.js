@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const githubAPI = require('./githubAPI');
 const util = require('./.git/hooks/util/util');
 const gitCommand = require('./gitCommands');
 const token = require('./token');
@@ -56,10 +55,9 @@ const getNonCreatedPRBranches = async arrayBranches => {
   const urlRepo = gitCommand.getURLGitHub();
   const path = `/repos/${urlRepo}/pulls`;
   const listPR = await ghAPI.fetchInfoFromGHAPI(path);
-  console.log('listPR: ', listPR);
-  // process.exit(1);
+
   const res = arrayBranches.filter(branch => {
-    return !existPullRequestOfBranch(branch, listPR[0]);
+    return !existPullRequestOfBranch(branch, listPR);
   });
 
   return res;
@@ -75,5 +73,3 @@ module.exports = {
   getNonCreatedPRBranches,
   Check,
 };
-
-//prueba10

@@ -1,26 +1,13 @@
 const https = require('https');
-const gitCommand = require('./gitCommands');
 
-const apiGH = 'api.github.com';
 let tokenGH;
 
 const configToken = newToken => {
   tokenGH = newToken;
 };
 
-const fetchInfoFromGHAPI = path => {
-  const options = {
-    host: 'api.github.com',
-    path,
-    method: 'GET',
-    headers: {
-      Authorization: `token ${tokenGH}`,
-      'user-agent': 'node.js',
-    },
-  };
-
-  return new Promise((resolve, reject) => {
-    // Do async job
+const makeRequest = options =>
+  new Promise((resolve, reject) => {
     https
       .get(options, resp => {
         let data = '';
@@ -37,25 +24,21 @@ const fetchInfoFromGHAPI = path => {
         reject(err);
       });
   });
-};
 
-const launch = async () => {
-  try {
-    // const token = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
-    // configToken(token);
-    // const client = await fetchInfoFromGHAPI(
-    //   '/repos/AlbertHernandez/hook/pulls',
-    // );
-    // console.log('client: ', client);
-    const urlRepo = gitCommand.getURLGitHub();
-    const url = `/repos/${urlRepo}/pulls`;
-    console.log('url: ', url);
-  } catch (error) {
-    console.log('Error: ', error);
-  }
-};
+const fetchInfoFromGHAPI = async path => {
+  const options = {
+    host: 'api.github.com',
+    path,
+    method: 'GET',
+    headers: {
+      Authorization: `token ${tokenGH}`,
+      'user-agent': 'node.js',
+    },
+  };
 
-launch();
+  const body = await makeRequest(options);
+  return body;
+};
 
 module.exports = {
   configToken,
