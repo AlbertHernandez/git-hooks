@@ -9,7 +9,7 @@ const notAllowedBranches = {
   staging: true,
   beta: true,
   master: true,
-  'remove-octonode': true,
+  label: true,
 };
 
 const inicialize = async tokenAuth => {
