@@ -4,6 +4,7 @@ const githubAPI = require('./githubAPI');
 const util = require('./.git/hooks/util/util');
 const gitCommand = require('./gitCommands');
 const token = require('./token');
+const ghAPI = require('./ghAPI');
 
 const notAllowedBranches = {
   staging: true,
@@ -13,9 +14,10 @@ const notAllowedBranches = {
 };
 
 const inicialize = async tokenAuth => {
-  githubAPI.initClient(tokenAuth);
-  const urlRepo = gitCommand.getURLGitHub();
-  githubAPI.initRepo(urlRepo);
+  // githubAPI.initClient(tokenAuth);
+  // const urlRepo = gitCommand.getURLGitHub();
+  // githubAPI.initRepo(urlRepo);
+  ghAPI.configToken(tokenAuth);
 };
 
 const existPullRequestOfBranch = (branch, pullRequestArray = []) => 
@@ -51,8 +53,11 @@ const getBranchesPendingToPush = () => {
 const getNonCreatedPRBranches = async arrayBranches => {
   const tokenAuth = token.getTokenAuth();
   await inicialize(tokenAuth);
-  const listPR = await githubAPI.listPR();
-
+  const urlRepo = gitCommand.getURLGitHub();
+  const path = `/repos/${urlRepo}/pulls`;
+  const listPR = await ghAPI.fetchInfoFromGHAPI(path);
+  console.log('listPR: ', listPR);
+  process.exit(1);
   const res = arrayBranches.filter(branch => {
     return !existPullRequestOfBranch(branch, listPR[0]);
   });
@@ -70,3 +75,5 @@ module.exports = {
   getNonCreatedPRBranches,
   Check,
 };
+
+//prueba10

@@ -1,4 +1,5 @@
 const https = require('https');
+const gitCommand = require('./gitCommands');
 
 const apiGH = 'api.github.com';
 let tokenGH;
@@ -40,13 +41,23 @@ const fetchInfoFromGHAPI = path => {
 
 const launch = async () => {
   try {
-    const token = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
-    configToken(token);
-    const client = await fetchInfoFromGHAPI(
-      '/repos/AlbertHernandez/hook/pulls',
-    );
-    console.log('client: ', client);
+    // const token = 'ae7808ada3d9133b6dfffceb4d661a0278ca1794';
+    // configToken(token);
+    // const client = await fetchInfoFromGHAPI(
+    //   '/repos/AlbertHernandez/hook/pulls',
+    // );
+    // console.log('client: ', client);
+    const urlRepo = gitCommand.getURLGitHub();
+    const url = `/repos/${urlRepo}/pulls`;
+    console.log('url: ', url);
   } catch (error) {
     console.log('Error: ', error);
   }
+};
+
+launch();
+
+module.exports = {
+  configToken,
+  fetchInfoFromGHAPI,
 };
