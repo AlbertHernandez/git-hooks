@@ -50,5 +50,3 @@ const launch = async () => {
     console.log('Error: ', error);
   }
 };
-
-launch();
