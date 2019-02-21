@@ -65,8 +65,37 @@ const Check = () => {
   return currentBranch in notAllowedBranches;
 };
 
+const getNumberOfPR = branch => {
+  const dicc = { prueba10: 9, rama12: 3 };
+  return dicc[branch];
+};
+
+const getNumberPR = async branches => {
+  const urlRepo = gitCommand.getURLGitHub();
+  const path = `/repos/${urlRepo}/pulls`;
+  const listPR = await ghAPI.fetchInfoFromGHAPI(path);
+  const res = listPR
+    .filter(pr => branches.includes(pr.head.ref))
+    .map(pr => pr.number);
+  return res;
+};
+
+const putLabelInBranches = async branches => {
+  const urlRepo = gitCommand.getURLGitHub();
+  const tokenAuth = token.getTokenAuth();
+  await inicialize(tokenAuth);
+  const numberOfAllPR = await getNumberPR(branches);
+  const labels = ['merged in beta'];
+
+  numberOfAllPR.forEach(async numberOfPR => {
+    const path = `/repos/${urlRepo}/issues/${numberOfPR}/labels`;
+    await ghAPI.putLabelsInPR(path, labels);
+  });
+};
+
 module.exports = {
   getBranchesPendingToPush,
   getNonCreatedPRBranches,
   Check,
+  putLabelInBranches,
 };
