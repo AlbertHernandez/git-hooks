@@ -16,7 +16,7 @@ const inicialize = async tokenAuth => {
   ghAPI.configToken(tokenAuth);
 };
 
-const existPullRequestOfBranch = (branch, pullRequestArray = []) => 
+const existPullRequestOfBranch = (branch, pullRequestArray = []) =>
   pullRequestArray
     .map(pr => pr.head.ref)
     .filter(prBranch => prBranch === branch).length === 1;
