@@ -6,27 +6,7 @@ const configToken = newToken => {
   tokenGH = newToken;
 };
 
-const makeRequest = options =>
-  new Promise((resolve, reject) => {
-    https
-      .request(options, resp => {
-        let data = '';
-
-        resp.on('data', chunk => {
-          data += chunk.toString('utf8');
-        });
-
-        resp.on('end', () => {
-          resolve(JSON.parse(data));
-        });
-      })
-      .on('error', err => {
-        reject(err);
-      })
-      .end();
-  });
-
-const makePost = (options, dataToSend) => {
+const makeRequest = (options, dataToSend = false) => {
   return new Promise((resolve, reject) => {
     let data = '';
     const req = https.request(options, res => {
@@ -42,7 +22,10 @@ const makePost = (options, dataToSend) => {
       reject(e);
     });
 
-    req.write(dataToSend);
+    if (dataToSend !== false) {
+      req.write(dataToSend);
+    }
+
     req.end();
   });
 };
@@ -78,23 +61,22 @@ const putLabelsInPR = async (path, labelsArray) => {
       'Content-Length': formData.length,
     },
   };
-  const response = await makePost(options, formData);
+  const response = await makeRequest(options, formData);
   return response;
 };
 
-const launch = async () => {
-  console.log('hola mundo');
-  configToken('ae7808ada3d9133b6dfffceb4d661a0278ca1794');
-  // const pr = await fetchInfoFromGHAPI('/repos/AlbertHernandez/hook/pulls');
-  // const pr = await putLabelsInPR('/repos/AlbertHernandez/hook/issues/7/labels', ['lol']);
-  console.log('prueba: ', pr);
-  console.log('despues')
-
-};
+// const launch = async () => {
+//   console.log('hola mundo');
+//   configToken('ae7808ada3d9133b6dfffceb4d661a0278ca1794');
+//   // const pr = await fetchInfoFromGHAPI('/repos/AlbertHernandez/hook/pulls');
+//   const pr = await putLabelsInPR('/repos/AlbertHernandez/hook/issues/7/labels', ['toni']);
+//   console.log('prueba: ', pr);
+// };
 
 launch();
 
 module.exports = {
   configToken,
   fetchInfoFromGHAPI,
+  putLabelsInPR,
 };
