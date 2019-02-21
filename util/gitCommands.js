@@ -12,11 +12,15 @@ const getCurrentBranch = () =>
   execute('git rev-parse --abbrev-ref HEAD').trim();
 
 const getIDCommitNotPushInBranch = branch => {
-  const res = execute(`git log origin/${branch}..HEAD --format="%H"`)
-    .split('\n')
-    .map(id => id.substr(0, 7));
-  res.pop();
-  return res;
+  try {
+    const res = execute(`git log origin/${branch}..HEAD --format="%H"`)
+      .split('\n')
+      .map(id => id.substr(0, 7));
+    res.pop();
+    return res;
+  } catch (error) {
+    console.log('Error: ', error);
+  }
 };
 
 const getBranchesContainsCommitIDWithoutClean = commitID =>
