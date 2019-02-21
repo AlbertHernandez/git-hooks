@@ -9,7 +9,6 @@ const notAllowedBranches = {
   staging: true,
   beta: true,
   master: true,
-  label: true,
 };
 
 const inicialize = async tokenAuth => {
