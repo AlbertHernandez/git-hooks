@@ -65,11 +65,6 @@ const Check = () => {
   return currentBranch in notAllowedBranches;
 };
 
-const getNumberOfPR = branch => {
-  const dicc = { prueba10: 9, rama12: 3 };
-  return dicc[branch];
-};
-
 const getNumberPR = async branches => {
   const urlRepo = gitCommand.getURLGitHub();
   const path = `/repos/${urlRepo}/pulls`;
@@ -85,7 +80,8 @@ const putLabelInBranches = async branches => {
   const tokenAuth = token.getTokenAuth();
   await inicialize(tokenAuth);
   const numberOfAllPR = await getNumberPR(branches);
-  const labels = ['merged in beta'];
+  const currentBranch = gitCommand.getCurrentBranch();
+  const labels = [`Merged in ${currentBranch}`];
 
   numberOfAllPR.forEach(async numberOfPR => {
     const path = `/repos/${urlRepo}/issues/${numberOfPR}/labels`;

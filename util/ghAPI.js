@@ -30,7 +30,7 @@ const makeRequest = (options, dataToSend = false) => {
   });
 };
 
-const fetchInfoFromGHAPI = path => {
+const fetchInfoFromGHAPI = async path => {
   const options = {
     host: 'api.github.com',
     path,
@@ -41,10 +41,11 @@ const fetchInfoFromGHAPI = path => {
     },
   };
 
-  return makeRequest(options);
+  const body = await makeRequest(options);
+  return body;
 };
 
-const putLabelsInPR = (path, labelsArray) => {
+const putLabelsInPR = async (path, labelsArray) => {
   const formData = JSON.stringify({
     labels: labelsArray,
   });
@@ -60,8 +61,19 @@ const putLabelsInPR = (path, labelsArray) => {
       'Content-Length': formData.length,
     },
   };
-  return makeRequest(options, formData);
+  const response = await makeRequest(options, formData);
+  return response;
 };
+
+// const launch = async () => {
+//   console.log('hola mundo');
+//   configToken('ae7808ada3d9133b6dfffceb4d661a0278ca1794');
+//   // const pr = await fetchInfoFromGHAPI('/repos/AlbertHernandez/hook/pulls');
+//   const pr = await putLabelsInPR('/repos/AlbertHernandez/hook/issues/7/labels', ['toni']);
+//   console.log('prueba: ', pr);
+// };
+
+// launch();
 
 module.exports = {
   configToken,
