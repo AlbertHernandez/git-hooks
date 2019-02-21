@@ -19,7 +19,10 @@ const getIDCommitNotPushInBranch = branch => {
     res.pop();
     return res;
   } catch (error) {
-    console.log('Error: ', error);
+    console.log(
+      '\x1b[31m%s\x1b[0m',
+      '\nDont exist your branch in remote repo, please create it before you push or ush --no-verify',
+    );
   }
 };
 
