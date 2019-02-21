@@ -65,16 +65,6 @@ const putLabelsInPR = async (path, labelsArray) => {
   return response;
 };
 
-// const launch = async () => {
-//   console.log('hola mundo');
-//   configToken('ae7808ada3d9133b6dfffceb4d661a0278ca1794');
-//   // const pr = await fetchInfoFromGHAPI('/repos/AlbertHernandez/hook/pulls');
-//   const pr = await putLabelsInPR('/repos/AlbertHernandez/hook/issues/7/labels', ['toni']);
-//   console.log('prueba: ', pr);
-// };
-
-// launch();
-
 module.exports = {
   configToken,
   fetchInfoFromGHAPI,
