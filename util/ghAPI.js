@@ -73,7 +73,7 @@ const putLabelsInPR = async (path, labelsArray) => {
 //   console.log('prueba: ', pr);
 // };
 
-launch();
+// launch();
 
 module.exports = {
   configToken,
