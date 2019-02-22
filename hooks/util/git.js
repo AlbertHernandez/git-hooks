@@ -94,3 +94,5 @@ module.exports = {
   Check,
   putLabelInBranches,
 };
+
+console.log('hola mundo')
