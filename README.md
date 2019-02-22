@@ -60,6 +60,7 @@ git clone https://github.com/AlbertHernandez/hook.git
 #### 4.1. Open token file
 
 ```
+cd hooks
 open hooks/util/token.js
 ```
 
