@@ -9,6 +9,7 @@ const notAllowedBranches = {
   staging: true,
   beta: true,
   master: true,
+  dev4: true,
 };
 
 const inicialize = async tokenAuth => {
@@ -95,4 +96,4 @@ module.exports = {
   putLabelInBranches,
 };
 
-console.log('hola mundo')
+console.log('hola mundo');
