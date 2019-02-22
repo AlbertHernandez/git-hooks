@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+const git = require('./util/git');
+
+const showBAD = arrayBranches => {
+  console.log(
+    '\x1b[31m%s\x1b[0m',
+    '\nERROR: Dont exist Pull Request in this branches:',
+  );
+  arrayBranches.forEach(branch => {
+    console.log('\x1b[31m%s\x1b[0m', `* ${branch}`);
+  });
+  console.log(
+    '\x1b[31m%s\x1b[0m',
+    '\nPlease create a PR on these branches before you push.',
+  );
+};
+
+const showOK = () => {
+  console.log(
+    '\x1b[32m%s\x1b[0m',
+    '\nOK. Uploading your local changes to the repo',
+  );
+};
+
+const checkNonCreatedPR = async () => {
+  if (git.Check()) {
+    try {
+      const branchesPendingToPush = git.getBranchesPendingToPush();
+      const nonCreatedPRBranches = await git.getNonCreatedPRBranches(
+        branchesPendingToPush,
+      );
+
+      if (nonCreatedPRBranches.length !== 0) {
+        showBAD(branchesPendingToPush);
+        process.exit(1);
+      } else {
+        showOK();
+      }
+
+      if (branchesPendingToPush.length !== 0) {
+        console.log(
+          '\x1b[32m%s\x1b[0m',
+          '\nCreating Labels in branches merged...',
+        );
+        git.putLabelInBranches(branchesPendingToPush);
+      }
+    } catch (e) {
+      process.exit(1);
+    }
+  }
+};
+
+checkNonCreatedPR();

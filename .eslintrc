@@ -1,0 +1,100 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["react", "jsx-a11y", "import", "prettier"],
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./config/webpack.config.dev.js"
+      }
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "rules": {
+    "no-param-reassign": "off",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "import/no-duplicates": [0],
+    "import/no-absolute-path": "off",
+    "class-methods-use-this": "off",
+    "arrow-body-style": "off",
+    "max-len": [1, 140, 2],
+    "jsx-a11y/img-has-alt": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "arrow-parens": 0,
+    "no-underscore-dangle": 0,
+    "react/jsx-indent-props": [0],
+    "react/jsx-closing-bracket-location": 0,
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 80,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": true,
+        "singleQuote": true,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "parser": "babylon"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "react/jsx-max-props-per-line": [
+      "error",
+      {
+        "maximum": 3
+      }
+    ],
+    "react/require-default-props": "off",
+    "react/forbid-prop-types": "off",
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": false,
+        "assignment": false
+      }
+    ],
+    "import/extensions": [0, { "js": "never", "jsx": "never" }],
+    "import/no-extraneous-dependencies": [
+      0,
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
+    "import/no-unresolved": [
+      2,
+      {
+        "ignore": ["^client/", "^service/", "^shared/"]
+      }
+    ]
+  },
+  "globals": {
+    "describe": true,
+    "expect": true,
+    "test": true,
+    "it": true,
+    "afterAll": true,
+    "afterEach": true,
+    "beforeAll": true,
+    "beforeEach": true,
+    "jest": true,
+  }
+}
