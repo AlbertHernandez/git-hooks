@@ -31,7 +31,7 @@ const checkNonCreatedPR = async () => {
       );
 
       if (nonCreatedPRBranches.length !== 0) {
-        showBAD(branchesPendingToPush);
+        showBAD(nonCreatedPRBranches);
         process.exit(1);
       } else {
         showOK();
@@ -48,6 +48,7 @@ const checkNonCreatedPR = async () => {
       process.exit(1);
     }
   }
+  process.exit(1);
 };
 
 checkNonCreatedPR();

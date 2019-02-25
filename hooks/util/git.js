@@ -31,6 +31,7 @@ const getPullRequest = async () => {
 };
 
 const existPullRequestOfBranch = (branch, pullRequestArray = []) =>
+  // console.log('pullRequestArray: ', pullRequestArray);
   pullRequestArray
     .map(pr => pr.head.ref)
     .filter(prBranch => prBranch === branch).length === 1;
@@ -62,11 +63,9 @@ const getBranchesPendingToPush = () => {
 
 const getNonCreatedPRBranches = async arrayBranches => {
   const listPR = await getPullRequest();
-
   const res = arrayBranches.filter(branch => {
     return !existPullRequestOfBranch(branch, listPR);
   });
-
   return res;
 };
 
