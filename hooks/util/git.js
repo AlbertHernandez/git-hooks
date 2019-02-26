@@ -31,7 +31,6 @@ const getPullRequest = async () => {
 };
 
 const existPullRequestOfBranch = (branch, pullRequestArray = []) =>
-  // console.log('pullRequestArray: ', pullRequestArray);
   pullRequestArray
     .map(pr => pr.head.ref)
     .filter(prBranch => prBranch === branch).length === 1;
@@ -74,8 +73,8 @@ const Check = () => {
   return currentBranch in notAllowedBranches;
 };
 
-const getNumberPR = branches => {
-  const listPR = getPullRequest();
+const getNumberPR = async branches => {
+  const listPR = await getPullRequest();
   const res = listPR
     .filter(pr => branches.includes(pr.head.ref))
     .map(pr => pr.number);
@@ -89,7 +88,6 @@ const putLabelInBranches = async branches => {
   const numberOfAllPR = await getNumberPR(branches);
   const currentBranch = gitCommand.getCurrentBranch();
   const labels = [`Merged in ${currentBranch}`];
-
   numberOfAllPR.forEach(async numberOfPR => {
     const path = `/repos/${urlRepo}/issues/${numberOfPR}/labels`;
     await ghAPI.putLabelsInPR(path, labels);

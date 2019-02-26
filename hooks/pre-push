@@ -42,13 +42,12 @@ const checkNonCreatedPR = async () => {
           '\x1b[32m%s\x1b[0m',
           '\nCreating Labels in branches merged...',
         );
-        git.putLabelInBranches(branchesPendingToPush);
+        await git.putLabelInBranches(branchesPendingToPush);
       }
     } catch (e) {
       process.exit(1);
     }
   }
-  process.exit(1);
 };
 
 checkNonCreatedPR();
