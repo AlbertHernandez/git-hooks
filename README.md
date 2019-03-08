@@ -32,6 +32,7 @@ nvm use 8.15.0
 ### 2. Clone Github repo in your home
 
 ```
+cd ~
 git clone https://github.com/AlbertHernandez/hook.git
 ```
 
