@@ -29,14 +29,12 @@ const checkNonCreatedPR = async () => {
       const nonCreatedPRBranches = await git.getNonCreatedPRBranches(
         branchesPendingToPush,
       );
-
       if (nonCreatedPRBranches.length !== 0) {
         showBAD(nonCreatedPRBranches);
         process.exit(1);
       } else {
         showOK();
       }
-
       if (branchesPendingToPush.length !== 0) {
         console.log(
           '\x1b[32m%s\x1b[0m',

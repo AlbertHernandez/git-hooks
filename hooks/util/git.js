@@ -25,15 +25,36 @@ const getPullRequest = async () => {
   const tokenAuth = token.getTokenAuth();
   inicialize(tokenAuth);
   const urlRepo = gitCommand.getURLGitHub();
-  const path = `/repos/${urlRepo}/pulls`;
+  const path = `/repos/${urlRepo}/pulls?state=all`;
   pullRequest = await ghAPI.fetchInfoFromGHAPI(path);
   return pullRequest;
 };
 
-const existPullRequestOfBranch = (branch, pullRequestArray = []) =>
-  pullRequestArray
-    .map(pr => pr.head.ref)
-    .filter(prBranch => prBranch === branch).length === 1;
+const getBranchOfPr = pr => pr.head.ref;
+
+const existPullRequestInBranches = (branches, pullRequestArray = []) => {
+  const branchWithPR = {};
+  const branchWithoutPR = {};
+  branches.forEach(branch => {
+    branchWithoutPR[branch] = true;
+    if (!branchWithPR[branch]) {
+      for (let indexPR = 0; indexPR < pullRequestArray.length; indexPR += 1) {
+        const pr = getBranchOfPr(pullRequestArray[indexPR]);
+        branchWithPR[pr] = true;
+        if (pr === branch) {
+          delete branchWithoutPR[branch];
+          indexPR += 1;
+          branchWithPR[branch] = true;
+          break;
+        }
+      }
+    } else {
+      delete branchWithoutPR[branch];
+      branchWithPR[branch] = true;
+    }
+  });
+  return Object.keys(branchWithoutPR);
+};
 
 const getBranchesContainsCommitID = arrayBranches => {
   const array = util.removeWhiteSpaces(
@@ -62,10 +83,7 @@ const getBranchesPendingToPush = () => {
 
 const getNonCreatedPRBranches = async arrayBranches => {
   const listPR = await getPullRequest();
-  const res = arrayBranches.filter(branch => {
-    return !existPullRequestOfBranch(branch, listPR);
-  });
-  return res;
+  return existPullRequestInBranches(arrayBranches, listPR);
 };
 
 const Check = () => {
