@@ -29,7 +29,7 @@ nvm install 8.15.0
 nvm use 8.15.0
 ```
 
-### 2. Clone Github repo
+### 2. Clone Github repo in your home
 
 ```
 git clone https://github.com/AlbertHernandez/hook.git
@@ -69,7 +69,8 @@ open hooks/util/token.js
 ### 5. Update your hooks
 
 ```
-rm -r .git/hooks && mv hooks .git
+rm -r .git/hooks
+ln -s ~/hook/hooks .git
 ```
 
 ### Common problems solutions:
