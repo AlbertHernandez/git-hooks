@@ -61,7 +61,7 @@ git clone https://github.com/AlbertHernandez/hook.git
 #### 4.1. Open token file
 
 ```
-cd hooks
+cd git-hooks
 open hooks/util/token.js
 ```
 
@@ -71,7 +71,7 @@ open hooks/util/token.js
 
 ```
 rm -r .git/hooks
-ln -s ~/hook/hooks .git
+ln -s ~/git-hooks/hooks .git
 ```
 
 ### Common problems solutions:
